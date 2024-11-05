@@ -10,12 +10,11 @@ const items = [
   { image: '/assets/4.jpg', title: 'Item 4', subtitle: 'This is the fourth item' },
 ];
 
-const ItemSlidesImage = ({theme}) => {
-  // ایجاد آرایه‌ای از refها برای هر آیتم
+const ItemSlidesImage = ({ theme }) => {
   const itemRefs = useRef(items.map(() => React.createRef()));
 
   return (
-    <div>
+    <div style={{backgroundColor:theme.background}}>
       {items.map((val, key) => {
         const isInView = useInView(itemRefs.current[key], { threshold: 0.5 });
 
@@ -30,13 +29,15 @@ const ItemSlidesImage = ({theme}) => {
         return (
           <motion.div
             key={key}
-            ref={itemRefs.current[key]} // استفاده از ref مخصوص هر آیتم
-            initial={{ x: "100%" }} // موقعیت شروع (خارج از صفحه)
-            animate={{ x: isInView ? "0%" : "100%" }} // حرکت به مرکز
+            ref={itemRefs.current[key]}
+            initial={{ x: "100%" }}
+            animate={{ x: isInView ? "0%" : "100%" }}
             transition={{ duration: 1, type: "spring" }}
-            className={`flex flex-col justify-center items-center h-96 p-4 ${
-              key % 2 === 0 ? "bg-red-700 text-white" : `bg-${theme.background} text-${theme.color}`
-            }`}
+            className="flex flex-col justify-center items-center h-96 p-4"
+            style={{
+              backgroundColor: key % 2 === 0 ? "rgb(185, 28, 28)" : theme.background,
+              color: key % 2 === 0 ? "white" : theme.color,
+            }}
           >
             <PicCon src={val.image} />
             <ContentImage title={val.title} subtitle={val.subtitle} />

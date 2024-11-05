@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { useState } from "react";
 import Image from 'next/image';
 
@@ -49,44 +49,41 @@ export default function CarsPicker() {
     ];
 
     return (
-        <div  dir="rtl" className="flex flex-col">
-        <div className="flex flex-col space-x-0">
+        <div dir="rtl" className="flex flex-col">
+            <div className="flex flex-col space-x-0">
+                <div className="flex flex-row overflow-x-auto bg-gray-500 w-full text-white space-x-0 cursor-pointer">
+                    {images.map((val, ind) => (
+                        <h1
+                            key={ind}
+                            onClick={() => setCarsIndex(ind)}
+                            className={`p-2 rounded ${carsIndex === ind ? 'bg-black' : 'bg-gray-600'}`}
+                        >
+                            {val.title}
+                        </h1>
+                    ))}
+                </div>
 
-
-
-<div  className="flex flex-row overflow-x-auto bg-gray-500 w-full text-white space-x-0 cursor-pointer">
-                {images.map((val, ind) => (
-                    <h1
-                        key={ind}
-                        onClick={() => setCarsIndex(ind)} // استفاده از تابع arrow
-                        className={`p-2 rounded ${
-                            carsIndex === ind
-                                ? 'bg-black'  // دایره بزرگ‌تر و تیره‌تر
-                                : 'bg-gray-600'  // دایره‌های معمولی
-                        }`}
-                    >
-                        {val.title}
-                    </h1>
-                ))}
-            
-
-</div>
-<div className="flex flex-row space-x-4 bg-gray-600 p-2 overflow-x-auto">
-                {colors.map((val, ind) => (
-                    <div key={ind} className={` rounded-full cursor-pointer w-6 h-6 bg-${val} m-1`}></div> // اضافه کردن key برای هر عنصر
-                ))}
+                <div className="flex flex-row space-x-4 bg-gray-600 p-2 overflow-x-auto">
+                    {colors.map((color, index) => (
+                        <div
+                            key={index}
+                            className="rounded-full cursor-pointer w-6 h-6 m-1"
+                            style={{ backgroundColor: color }}
+                        ></div>
+                    ))}
+                </div>
             </div>
-        </div>
-        <div className="w-full "> {/* تنظیم ارتفاع به 60 */}
-        <div className='w-screen h-1/2  overflow-hidden'> {/* اضافه کردن overflow-hidden */}
-                <Image 
-                    src={images[carsIndex].src} 
-                    alt={`تصویر `} 
-                    width={10000} 
-                    height={240} // این مقدار را حذف کردیم
-                    style={{ objectFit: "cover", height: "100%", width: "100%" }}  // حفظ نسبت تصویر
-                />
-            </div>
+
+            <div className="w-full">
+                <div className="w-screen h-1/2 overflow-hidden">
+                    <Image 
+                        src={images[carsIndex].src} 
+                        alt="تصویر" 
+                        width={10000} 
+                        height={240}
+                        style={{ objectFit: "cover", height: "100%", width: "100%" }}
+                    />
+                </div>
             </div>
         </div>
     );
