@@ -92,7 +92,7 @@ const NavBarTE = () => {
       
         <div className="flex z-40 ">
           <motion.div 
-  initial={{ x: isOpen ? "100%" : "0%" }} // شروع از سمت راست یا وسط بسته به وضعیت isOpen
+  initial={{ x: !isOpen ? "100%" : "0%" }} // شروع از سمت راست یا وسط بسته به وضعیت isOpen
   animate={{ x: isOpen ? "0%" : "100%" }} // اگر isOpen باشد، به وسط می‌آید؛ اگر نباشد، به سمت راست می‌رود
 // هنگام بسته شدن به سمت راست حرکت می‌کند
   transition={{ duration: 0.8, ease: "easeInOut" }}
