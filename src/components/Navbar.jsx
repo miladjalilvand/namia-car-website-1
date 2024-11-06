@@ -56,24 +56,25 @@ const NavBar = () => {
                 self-center"
               onClick={handleClick}> 
                 <motion.div
-                className="w-5 h-1 bg-black self-start"
+                className="w-5 h-1  self-start"
                 animate={{ rotate: isRotated ? -45 : 0, y: isRotated ? 4 : 0, x: isRotated ? -6 : 0 }}
                 transition={{ duration: 1 }}
-                style={{ originX: 0, originY: 0 }}
+                style={{ originX: 0, originY: 0 , backgroundColor:currentTheme.color}}
             ></motion.div>
 
             <motion.div
                 animate={{ rotate: isRotated ? 45 : 0 }}
                 transition={{ duration: 1 }}
-                style={{ originX: 0.5, originY: 0 }}
-                className="w-10 h-1 bg-black"
+                style={{ originX: 0.5, originY: 0 , backgroundColor:currentTheme.color}}
+                className="w-10 h-1 "
             ></motion.div>
 
             <motion.div
                 animate={{ rotate: isRotated ? -45 : 0 }}
                 transition={{ duration: 1 }}
-                style={{ originX: 0.5, originY: 0.5 }}
-                className="w-5 h-1 bg-black self-end"
+                style={{ originX: 0.5, originY: 0.5 , backgroundColor:currentTheme.color }}
+                className="w-5 h-1  self-end"
+                
             ></motion.div></div>
 
 

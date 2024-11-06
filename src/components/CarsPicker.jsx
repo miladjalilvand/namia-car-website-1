@@ -49,7 +49,7 @@ export default function CarsPicker() {
     ];
 
     return (
-        <div dir="rtl" className="flex flex-col">
+        <div dir="rtl" className="flex flex-col z-30">
             <div className="flex flex-col space-x-0">
                 <div className="flex flex-row overflow-x-auto bg-gray-500 w-full text-white space-x-0 cursor-pointer">
                     {images.map((val, ind) => (
@@ -63,7 +63,7 @@ export default function CarsPicker() {
                     ))}
                 </div>
 
-                <div className="flex flex-row space-x-4 bg-gray-600 p-2 overflow-x-auto">
+                <div className="flex flex-row px-2 bg-gray-600 p-2 overflow-x-auto">
                     {colors.map((color, index) => (
                         <div
                             key={index}
@@ -75,16 +75,17 @@ export default function CarsPicker() {
             </div>
 
             <div className="w-full">
-                <div className="w-screen h-1/2 overflow-hidden">
-                    <Image 
-                        src={images[carsIndex].src} 
-                        alt="تصویر" 
-                        width={10000} 
-                        height={240}
-                        style={{ objectFit: "cover", height: "100%", width: "100%" }}
-                    />
-                </div>
-            </div>
+    <div className="w-screen overflow-hidden" style={{ height: "360px" }}> {/* ارتفاع دلخواه در اینجا */}
+        <Image 
+            src={images[carsIndex].src} 
+            alt="تصویر" 
+            width={10000} 
+            height={240}
+            style={{ objectFit: "cover", height: "100%", width: "100%" }} 
+        />
+    </div>
+</div>
+
         </div>
     );
 }
