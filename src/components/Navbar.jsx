@@ -33,13 +33,14 @@ const NavBar = () => {
 
 };
   const pushin = (path) => {
+    handleClick();
     changeNav(false);
     router.push(`/${path}`);
   };
 
   const pushcp = () => {
     toggleTheme();
-    changeNav(false);
+    handleClick();
     router.push(`http://localhost:3000/${currentPath}`);
   };
 
@@ -103,7 +104,7 @@ const NavBar = () => {
             </div>
             <div className="p-4 text-white">footer</div>
           </div>
-          <div onClick={() => changeNav(false)} className="fixed md:w-screen z-30 md:h-screen bg-black opacity-70"></div>
+          <div onClick={() => handleClick()} className="fixed md:w-screen z-30 md:h-screen bg-black opacity-70"></div>
         </div>
       ) : (
         <div className="fixed border-b-2 z-40
