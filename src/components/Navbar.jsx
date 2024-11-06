@@ -5,7 +5,14 @@ import { useEffect, useState } from "react";
 import { FaFileContract, FaMoon, FaPersonBooth, FaPhone, FaSun } from "react-icons/fa";
 import { IoPersonCircleOutline } from "react-icons/io5";
 import { AnimatePresence,motion } from "framer-motion";
-
+import Link from "next/link";
+const links = [
+  { name: "Home", url: "/" },
+  { name: "About Us", url: "about" },
+  { name: "Services", url: "services" },
+  { name: "Contact", url: "contact" },
+  { name: "Blog", url: "blog" }
+];
 const themes = {
   light: {
     background: 'white',
@@ -43,7 +50,7 @@ const NavBarTE = () => {
   const pushcp = () => {
     toggleTheme();
     handleClick();
-    router.push(`http://localhost:3000/${currentPath}`);
+    router.push(`http://localhost:3000${currentPath}`);
   };
 
   useEffect(() => {
@@ -106,9 +113,14 @@ const NavBarTE = () => {
               <div>search</div>
               <div className="flex flex-col items-center text-white font-extrabold space-y-2">
                 <div className="cursor-pointer" onClick={() => pushin('about')}>about</div>
-                <div>item</div>
-                <div>item</div>
-                <div>item</div>
+               {isOpen && links.map((val , key)=>(
+   <motion.div
+   initial={{opacity:0.1}}
+   animate={{opacity:1}}
+   transition={{duration:3}}
+   key={key} 
+   className="cursor-pointer" onClick={() => pushin(val.url)}>{val.url}</motion.div>
+               ))}
               </div>
             </div>
             <div className="p-4 text-white">footer</div>
