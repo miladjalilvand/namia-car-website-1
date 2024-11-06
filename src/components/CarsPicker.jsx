@@ -49,7 +49,7 @@ export default function CarsPicker() {
     ];
 
     return (
-        <div dir="rtl" className="flex flex-col z-30">
+        <div dir="rtl" className="flex flex-col z-20">
             <div className="flex flex-col space-x-0">
                 <div className="flex flex-row overflow-x-auto bg-gray-500 w-full text-white space-x-0 cursor-pointer">
                     {images.map((val, ind) => (
