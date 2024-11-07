@@ -4,10 +4,10 @@ import Image from "next/image";
 import { motion, useInView } from "framer-motion";
 
 const items = [
-  { image: '/assets/1.jpg', title: 'Item 1', subtitle: 'This is the first item' },
-  { image: '/assets/2.jpg', title: 'Item 2', subtitle: 'This is the second item' },
-  { image: '/assets/3.jpg', title: 'Item 3', subtitle: 'This is the third item' },
-  { image: '/assets/4.jpg', title: 'Item 4', subtitle: 'This is the fourth item' },
+  { image: '/assets/svg/agency.svg', title: 'Item 1', subtitle: 'This is the first item' },
+  { image: '/assets/svg/parts.svg', title: 'Item 2', subtitle: 'This is the second item' },
+  { image: '/assets/svg/price-list.svg', title: 'Item 3', subtitle: 'This is the third item' },
+  { image: '/assets/svg/services.svg', title: 'Item 4', subtitle: 'This is the fourth item' },
 ];
 
 const ItemSlidesImage = ({ theme }) => {
@@ -30,7 +30,8 @@ const ItemSlidesImage = ({ theme }) => {
           <div
           key={key}
           className="flex flex-col md:flex-row items-center justify-around h-screen "
-          style={ { direction:key%2==0? "ltr" :"rtl",
+          style={ { 
+            direction : key%2 === 0 ? "ltr": "rtl" ,
                 backgroundColor: key % 2 === 0 ? "rgb(185, 28, 28)" : theme.background,
                 color: key % 2 === 0 ? "white" : theme.color,
               }}
@@ -39,6 +40,7 @@ const ItemSlidesImage = ({ theme }) => {
   key={key}
   ref={itemRefs.current[key]}
   initial={{
+
     x: key % 2 === 0 ? "-100%" : "100%", // برای key زوج از سمت چپ شروع می‌شود و برای key فرد از سمت راست
     y: "-50%", // مقدار ثابت برای y
   }}
@@ -46,14 +48,14 @@ const ItemSlidesImage = ({ theme }) => {
     x: isInView ? "0%" : key % 2 === 0 ? "-100%" : "100%", // انیمیشن برای انتقال به وسط
     y: isInView ? "0%" : "-50%", // انیمیشن برای انتقال به وسط
   }}
-  transition={{ duration: 0.8, ease: "easeOut" }} // تنظیم زمان و نوع انیمیشن
+  transition={{ duration: 0.3, ease: "circInOut" }} // تنظیم زمان و نوع انیمیشن
 >
   <PicCon src={val.image} />
 </motion.div>
 
           <div className="flex-col">
-          <AnimatedText ind={key} button={false} text={"hi i am"} isInView={isInView} />
-          <AnimatedText ind={key} button={true} text={"hi i am"} isInView={isInView} />
+          <AnimatedText ind={key} button={false} text={val.subtitle} isInView={isInView} theme={[theme , key]} />
+          <AnimatedText ind={key} button={true} text={"hi i am"} isInView={isInView} textButton={val.title} theme={theme} />
 
           </div>
           {/* <ContentImage title={val.title} subtitle={val.subtitle} /> */}
@@ -96,7 +98,7 @@ function PicCon({ src }) {
     <Image src={src} alt="Item Image" width={400} height={400} className="rounded-lg m-4" />
   );
 }
-const AnimatedText = ({ text, isInView, button , ind }) => {
+const AnimatedText = ({ text, isInView, button , ind , textButton , theme }) => {
   const words = text.split(' '); // جمله را به کلمات تقسیم می‌کنیم
 
   return (
@@ -114,7 +116,9 @@ const AnimatedText = ({ text, isInView, button , ind }) => {
               delay: index * 0.3, // هر کلمه با تأخیر متفاوت وارد شود
               duration: 0.5,
             }}
-            className="mr-2" // فاصله بین کلمات
+            className="mr-2 font-extrabold text-3xl "
+            
+            style={{color : theme[0] == "light" && theme[1] % 2 ===0 ? "white" : theme == "light" && theme[1] % 2 ===0? 'red' : theme[1] % 2 !== 0 && 'red'   }}
           >
             {word}
           </motion.span>
@@ -132,9 +136,11 @@ const AnimatedText = ({ text, isInView, button , ind }) => {
             duration: 0.5,
           }}
         >
-         <div style={{backgroundColor:ind%2 == 0 ? "white" : "rgb(185, 28, 28)" ,
+         <div
+         className="w-1/2"
+         style={{backgroundColor:ind%2 == 0 ? "white" : "rgb(185, 28, 28)" ,
           color:ind%2 != 0 ? "white" : "rgb(185, 28, 28)"
-          }}>aaa</div>
+          }}>{textButton}</div>
         </motion.div>
       )}
     </div>

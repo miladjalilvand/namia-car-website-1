@@ -17,9 +17,10 @@ const themes = {
   light: {
     background: 'white',
     color: 'black',
+  
   },
   dark: {
-    background: 'black',
+    background: '#141414',
     color: 'white',
   },
 };
@@ -59,29 +60,29 @@ const NavBarTE = () => {
 
   return (
     <div className="flex flex-row z-50">
-                  <div className=" z-50">
+                  <div className=" z-50 ">
              <div 
               className="flex flex-col  fixed space-y-px pt-4 cursor-pointer
-                self-center"
+                self-center "
               onClick={handleClick}> 
                 <motion.div
                 className="w-5 h-1  self-start"
                 animate={{ rotate: isRotated ? -45 : 0, y: isRotated ? 4 : 0, x: isRotated ? -6 : 0 }}
                 transition={{ duration: 1 }}
-                style={{ originX: 0, originY: 0 , backgroundColor:currentTheme.color}}
+                style={{ originX: 0, originY: 0 ,backgroundColor:isOpen ? "white" :currentTheme.color }}
             ></motion.div>
 
             <motion.div
                 animate={{ rotate: isRotated ? 45 : 0 }}
                 transition={{ duration: 1 }}
-                style={{ originX: 0.5, originY: 0 , backgroundColor:currentTheme.color}}
+                style={{ originX: 0.5, originY: 0 , backgroundColor:isOpen ? "white" :currentTheme.color }}
                 className="w-10 h-1 "
             ></motion.div>
 
             <motion.div
                 animate={{ rotate: isRotated ? -45 : 0 }}
                 transition={{ duration: 1 }}
-                style={{ originX: 0.5, originY: 0.5 , backgroundColor:currentTheme.color }}
+                style={{ originX: 0.5, originY: 0.5 , backgroundColor:isOpen ? "white" :currentTheme.color }}
                 className="w-5 h-1  self-end"
                 
             ></motion.div></div>
@@ -89,13 +90,14 @@ const NavBarTE = () => {
 
               
             </div>
+        
       
         <div className="flex z-40 ">
           <motion.div 
   initial={{ x: !isOpen ? "100%" : "0%" }} // شروع از سمت راست یا وسط بسته به وضعیت isOpen
   animate={{ x: isOpen ? "0%" : "100%" }} // اگر isOpen باشد، به وسط می‌آید؛ اگر نباشد، به سمت راست می‌رود
 // هنگام بسته شدن به سمت راست حرکت می‌کند
-  transition={{ duration: 0.8, ease: "easeInOut" }}
+  transition={{ duration: 0.5, ease: "easeInOut" }}
         
           className="fixed z-40 flex flex-col w-full bg-red-800 opacity-90 min-h-screen md:w-1/3">
             <div className="flex flex-row items-start justify-between p-4">
@@ -128,9 +130,14 @@ const NavBarTE = () => {
         {  (isOpen && <div onClick={() => handleClick()} className="fixed md:w-screen z-30 md:h-screen bg-black opacity-70"></div>)}
         </div>
       (
-        <div className="fixed border-b-2 z-30
-         border-black w-full" style={{ backgroundColor: currentTheme.background }}>
-          <div dir="ltr" className="flex flex-row space-x-0 justify-between" style={{ backgroundColor: currentTheme.background }}>
+        <div className="fixed  z-30 
+         w-full "
+         style={{
+           boxShadow: `0 1px 3px ${currentTheme=="light" ? "black" :"grey"}`,
+          backgroundColor: `${currentTheme=="light" ? "black" :"grey"}`,
+          // borderBottom: `1px solid ${currentTheme.color}` // Correctly setting width, style, and color for bottom border
+        }}>
+          <div dir="ltr" className="flex flex-row space-x-0 justify-between items-center" style={{ backgroundColor: currentTheme.background }}>
             <div className="flex">
               <div className="w-8 h-8 md:h-12 md:w-12 bg-red-600 flex items-center justify-center cursor-pointer">
                 <FaPhone color="white" />
@@ -140,12 +147,14 @@ const NavBarTE = () => {
               </div>
               <div className="w-1 md:w-4"></div>
               <div className="md:hidden flex items-center justify-center cursor-pointer">
-                <IoPersonCircleOutline color="grey" />
+              <IoPersonCircleOutline size={24} color="grey" />
+
+
               </div>
-              <div className="hidden md:flex flex-row items-center justify-center rounded mt-1 h-8 p-1" style={{ backgroundColor: currentTheme.background, color: currentTheme.color }}>
-                ورود <IoPersonCircleOutline color="grey" />
+              <div className="hidden md:flex flex-row items-center justify-center cursor-pointer rounded mt-1 h-8 p-1 self-center space-x-1 " style={{ backgroundColor: currentTheme.background, color: currentTheme.color }}>
+                <h3 className="text-gray-500">ورود</h3> <IoPersonCircleOutline size={24}  color="grey" />
               </div>
-              <div className="flex ml-4 justify-center rounded mt-1 h-6 p-1 bg-red-700 text-sm text-white cursor-pointer md:text-xl pb-4 px-2 md:pb-8">
+              <div className="flex ml-4 justify-center rounded mt-1 h-6  bg-red-700 text-sm text-white cursor-pointer md:text-xl pb-4 px-2 md:pb-5 self-center">
                 طرح تعویض
               </div>
             </div>

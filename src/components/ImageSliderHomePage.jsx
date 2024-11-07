@@ -44,7 +44,9 @@ export default function ImageSliderHomePage({theme}) {
 
     return (
         <div className={`flex flex-col  md:flex-row justify-center items-center  md:mt-0 
-        bg-${theme.background} text-${theme.color}`}>
+        `}
+        style={{backgroundColor :theme.background , color : theme.color}}
+        >
             <div className="relative md:w-1/2 md:h-1/2 h-96  ">
               <motion.div 
               key={currentImage}
