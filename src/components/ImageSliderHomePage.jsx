@@ -47,7 +47,7 @@ export default function ImageSliderHomePage({theme}) {
         `}
         style={{backgroundColor :theme.background , color : theme.color}}
         >
-            <div className="relative md:w-1/2 md:h-1/2 h-96  ">
+            <div className="relative h-2/3 md:w-1/2 md:h-1/2   ">
               <motion.div 
               key={currentImage}
                initial={{ y: 100, opacity: 0 }} // Start slightly below with transparency
@@ -64,11 +64,11 @@ export default function ImageSliderHomePage({theme}) {
                 </motion.div>
 
                 {/* دکمه‌های بعدی و قبلی */}
-                <div className="  absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2    ">
-                    <button onClick={prevImage} className="bg-gray-700 text-white px-4 py-2  hover:bg-gray-800">
+                <div className="  absolute bottom-0 left-0  -1/2 flex  ">
+                    <button onClick={prevImage} className="bg-red-700 text-white px-4 py-2  hover:bg-gray-800">
                     &lt;
                     </button>
-                    <button onClick={nextImage} className="bg-gray-700 text-white px-4 py-2  hover:bg-gray-800">
+                    <button onClick={nextImage} className="bg-red-700 text-white px-4 py-2  hover:bg-gray-800">
                     &gt;
                     </button>
                 </div>

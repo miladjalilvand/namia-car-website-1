@@ -102,7 +102,7 @@ const AnimatedText = ({ text, isInView, button , ind , textButton , theme }) => 
   const words = text.split(' '); // جمله را به کلمات تقسیم می‌کنیم
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col p-2">
       <div className="flex flex-wrap">
         {!button && words.map((word, index) => (
           <motion.span
@@ -137,7 +137,7 @@ const AnimatedText = ({ text, isInView, button , ind , textButton , theme }) => 
           }}
         >
          <div
-         className="w-1/2"
+         className="w-1/2 cursor-pointer"
          style={{backgroundColor:ind%2 == 0 ? "white" : "rgb(185, 28, 28)" ,
           color:ind%2 != 0 ? "white" : "rgb(185, 28, 28)"
           }}>{textButton}</div>
