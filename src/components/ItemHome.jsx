@@ -35,7 +35,7 @@ export default function MotD({ params }) {
       transition={{ duration: 0.5 }}
     >
       <div>
-        <h1>{params || 'error'}</h1> {/* اگر params موجود بود، نمایش داده شود، در غیر این صورت 'error' نمایش می‌یابد */}
+        <div className="text-3xl" >{params || 'error'}</div> {/* اگر params موجود بود، نمایش داده شود، در غیر این صورت 'error' نمایش می‌یابد */}
       </div>
     </motion.div>
   );

@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { easeInOut, motion } from "framer-motion";
 import Image from 'next/image';
 
 const images = [
@@ -75,15 +76,23 @@ export default function CarsPicker() {
             </div>
 
             <div className="w-full">
-    <div className="w-screen overflow-hidden" style={{ height: "360px" }}> {/* ارتفاع دلخواه در اینجا */}
+    <motion.div
+    initial={{opacity:0.1}}
+    className="w-screen overflow-hidden" style={{ height: "450px" }}
+    animate={{opacity:0.99}}
+    transition={{duration:0.9 , ease:easeInOut}}
+    key={carsIndex}
+    
+    > {/* ارتفاع دلخواه در اینجا */}
         <Image 
+        
             src={images[carsIndex].src} 
             alt="تصویر" 
             width={10000} 
             height={240}
             style={{ objectFit: "cover", height: "100%", width: "100%" }} 
         />
-    </div>
+    </motion.div>
 </div>
 
         </div>

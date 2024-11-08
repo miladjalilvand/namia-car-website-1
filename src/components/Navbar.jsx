@@ -174,7 +174,7 @@ const NavBarTE = () => {
               </div>
             </div>
 
-            <h1 onClick={() => pushin('/')} className="cursor-pointer text-black pr-12">
+            <h1 onClick={() => router.push('/')} className="cursor-pointer text-black pr-12">
                   *Logo
                 </h1>
           </div>
