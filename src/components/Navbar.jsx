@@ -6,6 +6,7 @@ import { FaFileContract, FaMoon, FaPersonBooth, FaPhone, FaSearch, FaSun } from 
 import { IoPersonCircleOutline } from "react-icons/io5";
 import { AnimatePresence,motion } from "framer-motion";
 import Link from "next/link";
+import ButtonContact from "./buttonContact";
 const links = [
   { name: "خانه", url: "/" },
   { name: "محصولات", url: "products" },
@@ -154,9 +155,9 @@ const NavBarTE = () => {
         }}>
           <div dir="ltr" className="flex flex-row space-x-0 justify-between items-center" style={{ backgroundColor: currentTheme.background }}>
             <div className="flex">
-              <div className="w-8 h-8 md:h-12 md:w-12 bg-red-600 flex items-center justify-center cursor-pointer">
+             <ButtonContact child={ <div className="w-8 h-8 md:h-12 md:w-12 bg-red-600 flex items-center justify-center cursor-pointer">
                 <FaPhone color="white" />
-              </div>
+              </div>} />
               <div onClick={toggleTheme} className="hidden md:flex items-center justify-center cursor-pointer w-8 h-8 md:h-12 md:w-12">
                 {theme === "light" ? <FaMoon color="grey" /> : <FaSun color="white" />}
               </div>
