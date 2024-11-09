@@ -33,7 +33,7 @@ export default function RootLayout({ children }) {
         className={`${vaz.className}  antialiased " h-screen    `}
       >
         <ThemeProvider><NavBar/>
-        <div className="pt-6 overflow-hidden">{children} </div>
+        <div className="pt-2 overflow-hidden">{children} </div>
         <Footer/></ThemeProvider>
  
     

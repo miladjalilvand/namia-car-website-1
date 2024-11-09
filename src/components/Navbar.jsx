@@ -11,7 +11,7 @@ const links = [
   { name: "محصولات", url: "products" },
   { name: "شرایط فروش", url: "services" },
   { name: "قطعات", url: "contact" },
-  { name: "تماس با ما ", url: "blog" }
+  { name: "تماس با ما ", url: "contact" }
 ];
 const themes = {
   light: {
