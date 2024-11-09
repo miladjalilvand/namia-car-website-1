@@ -30,10 +30,10 @@ export default function RootLayout({ children }) {
   return (  
     <html lang="en">
       <body dir="rtl"
-        className={`${vaz.className}  antialiased " h-screen `}
+        className={`${vaz.className}  antialiased " h-screen    `}
       >
         <ThemeProvider><NavBar/>
-        <div className="pt-0 ">{children} </div>
+        <div className="pt-6 overflow-hidden">{children} </div>
         <Footer/></ThemeProvider>
  
     

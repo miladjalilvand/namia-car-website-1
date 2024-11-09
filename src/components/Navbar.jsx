@@ -8,7 +8,7 @@ import { AnimatePresence,motion } from "framer-motion";
 import Link from "next/link";
 const links = [
   { name: "خانه", url: "/" },
-  { name: "محصولات", url: "about" },
+  { name: "محصولات", url: "products" },
   { name: "شرایط فروش", url: "services" },
   { name: "قطعات", url: "contact" },
   { name: "تماس با ما ", url: "blog" }
@@ -130,7 +130,7 @@ const NavBarTE = () => {
    <motion.div
    initial={{opacity:0.1}}
    animate={{opacity:1}}
-   transition={{duration:3}}
+   transition={{duration:1.5}}
    key={key} 
    className="cursor-pointer" onClick={() => pushin(val.url)}>{val.name}</motion.div>
                ))}

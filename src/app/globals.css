@@ -19,3 +19,13 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
+/* برای مرورگرهای مدرن */
+/* برای مرورگرهای مدرن */
+/* پنهان‌کردن اسکرول بار اما با قابلیت اسکرول */
+::-webkit-scrollbar {
+  display: none;
+}
+
+body {
+  overflow: auto;
+}

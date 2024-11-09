@@ -22,7 +22,7 @@ export default function Home() {
   const { theme, toggleTheme } = useTheme();
   const currentTheme = themes[theme];
   return (
-  <div className="flex flex-col overflow-hidden pb-0   ">
+  <div className="flex flex-col  pb-0   ">
 
 
 <ImageSliderHomePage theme={currentTheme}/>
