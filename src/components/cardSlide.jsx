@@ -4,10 +4,10 @@ import Image from "next/image";
 import { motion, useInView } from "framer-motion";
 
 const items = [
-  { image: '/assets/svg/agency.svg', title: 'Item 1', subtitle: 'This is the first item' },
-  { image: '/assets/svg/parts.svg', title: 'Item 2', subtitle: 'This is the second item' },
-  { image: '/assets/svg/price-list.svg', title: 'Item 3', subtitle: 'This is the third item' },
-  { image: '/assets/svg/services.svg', title: 'Item 4', subtitle: 'This is the fourth item' },
+  { image: '/assets/svg/agency.svg', title: 'محصولات چری', subtitle: 'محصولات مدیران خودرو' },
+  { image: '/assets/svg/parts.svg', title: 'شرایط فروش چری', subtitle: 'شرایط فروش مدیران خودرو' },
+  { image: '/assets/svg/price-list.svg', title: 'قطعات چری', subtitle: 'قطعات مدیران خودرو' },
+  { image: '/assets/svg/services.svg', title: 'نمایندگی چری', subtitle: 'نمایندگی مدیران خودرو' },
 ];
 
 const ItemSlidesImage = ({ theme }) => {
