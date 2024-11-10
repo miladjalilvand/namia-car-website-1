@@ -4,6 +4,7 @@ import "./globals.css";
 import Footer from "@/components/Footer";
 import NavBar from "@/components/Navbar";
 import { ThemeProvider } from "./ThemeContext";
+import { LoadingProvider } from "./LoadingContext";
 
 
 
@@ -32,9 +33,10 @@ export default function RootLayout({ children }) {
       <body dir="rtl"
         className={`${vaz.className}  antialiased " h-screen    `}
       >
+        <LoadingProvider> 
         <ThemeProvider><NavBar/>
-        <div className="pt-2 overflow-hidden">{children} </div>
-        <Footer/></ThemeProvider>
+        <div className=" overflow-hidden">{children} </div>
+        <Footer/></ThemeProvider></LoadingProvider>
  
     
       </body>

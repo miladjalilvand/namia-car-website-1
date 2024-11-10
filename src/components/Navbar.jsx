@@ -6,7 +6,10 @@ import { FaFileContract, FaMoon, FaPersonBooth, FaPhone, FaSearch, FaSun } from 
 import { IoPersonCircleOutline } from "react-icons/io5";
 import { AnimatePresence,motion } from "framer-motion";
 import Link from "next/link";
+
+
 import ButtonContact from "./buttonContact";
+import { useLoading } from "@/app/LoadingContext";
 const links = [
   { name: "خانه", url: "/" },
   { name: "محصولات", url: "products" },
@@ -28,6 +31,7 @@ const themes = {
 
 const NavBarTE = () => {
 
+  const {loading ,changeLoading } =useLoading();
   
   const [isRotated, setIsRotated] = useState(false);
 
@@ -39,15 +43,26 @@ const NavBarTE = () => {
   const currentPath = usePathname();
 
   const handleClick = () => {
+
     setIsRotated(!isRotated);
     changeNav(!isOpen);
 
 };
-  const pushin = (path) => {
+
+const pushin = (path) => {
+  // تغییر وضعیت لودینگ به true (نمایش لودینگ)
+  changeLoading();
+
+  // ایجاد یک تایمر با تأخیر 3 ثانیه قبل از انجام عملیات
+  setTimeout(() => {
     handleClick();
     changeNav(false);
     router.push(`/${path}`);
-  };
+    
+    // پس از انتقال، لودینگ را غیرفعال می‌کنیم
+    changeLoading();
+  }, 3000); // 3 ثانیه تأخیر
+};
 
   const pushcp = () => {
     toggleTheme();
@@ -175,9 +190,14 @@ const NavBarTE = () => {
               </div>
             </div>
 
-            <h1 onClick={() => router.push('/')} className="cursor-pointer text-black pr-12">
+<div className="flex flex-row">   <h1 onClick={() => router.push('/')} className="cursor-pointer text-black bg-amber-500 pr-10">
                   *Logo
                 </h1>
+<h1 onClick={() => router.push('/')} className="z-50 pr-12">
+               
+                </h1>
+             
+</div>
           </div>
         </div>
       )

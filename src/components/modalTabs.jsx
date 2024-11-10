@@ -6,6 +6,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper-bundle.css';
 import { motion, AnimatePresence } from 'framer-motion';
 import TabScreen from './tabScreenContact';
+import { FaTwitter,FaInstagram , FaLinkedin, FaRegWindowClose } from 'react-icons/fa';
 const myTabData = [
     {
       title: "Item 1",
@@ -28,7 +29,7 @@ export default function ModalWithTabs({ isOpen, onClose }) {
   const [activeTab, setActiveTab] = useState(0);
   const swiperRef = useRef(null); // استفاده از useRef برای ارجاع به نمونه Swiper
 
-  const tabs = ["Tab 1", "Tab 2", "Tab 3"]; // لیست تب‌ها
+  const tabs = ["واحد فروش", "واحد خدمات", "واحد قطعات"]; // لیست تب‌ها
 
   const handleTabClick = (index) => {
     setActiveTab(index);
@@ -38,7 +39,8 @@ export default function ModalWithTabs({ isOpen, onClose }) {
   return (
     <AnimatePresence>
       {isOpen && (
-        <Dialog open={isOpen} onClose={onClose} className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-gray-800 bg-opacity-50">
+        <Dialog open={isOpen} onClose={onClose} className="fixed inset-0
+         z-50 flex items-center justify-center p-4 bg-gray-800 bg-opacity-50">
          <div className='flex flex-col justify-evenly items-center'>
 
          <motion.div
@@ -48,22 +50,27 @@ export default function ModalWithTabs({ isOpen, onClose }) {
             transition={{ duration: 0.5 }}
             className="absolute inset-0 flex items-center justify-center"
           >
-            <Dialog.Panel className="bg-white p-6 md:max-w-lg w-screen md:w-full h-screen rounded shadow-lg relative">
+            <Dialog.Panel className="bg-white p-6 md:max-w-lg w-screen md:w-full 
+            h-screen md:h-4/5 rounded shadow-lg relative">
              <div className='flex flex-row justify-between items-center '>
-             <button onClick={onClose} className="absolute top-2 right-2">close</button>
+             <button onClick={onClose} className="absolute top-2 right-2">
+              <FaRegWindowClose/>
+             </button>
              <div className='flex flex-row space-x-2'>
-             <button onClick={onClose} className="absolute top-2 left-2">li</button>
-             <button onClick={onClose} className="absolute top-2 left-6">tl</button>
-             <button onClick={onClose} className="absolute top-2 left-12">cv</button>
+             <button onClick={onClose} className="absolute top-2 left-2"><FaInstagram/></button>
+             <button onClick={onClose} className="absolute top-2 left-6"><FaTwitter/></button>
+             <button onClick={onClose} className="absolute top-2 left-12"><FaLinkedin/></button>
              </div>
              </div>
-
-              <div className="flex justify-center space-x-4 mb-4">
+ 
+              <div className={`flex justify-center space-x-4 mb-4   `}>
                 {tabs.map((tab, index) => (
                   <button
+                  className={`${ "hover:bg-red-100   "}`}
                     key={index}
                     onClick={() => handleTabClick(index)} // تغییر تابع کلیک
                     style={{
+                      
                       padding: '8px 16px',
                     //   color: activeTab === index ? 'white' : '#4A4A4A',
                     //   backgroundColor: activeTab === index ? '#3B82F6' : 'transparent',
