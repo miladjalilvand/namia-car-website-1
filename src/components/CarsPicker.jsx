@@ -78,7 +78,7 @@ export default function CarsPicker() {
             <div className="w-full">
     <motion.div
     initial={{opacity:0.1}}
-    className="w-screen overflow-hidden" style={{ height: "450px" }}
+    className="w-screen overflow-hidden" style={{ height: "450px" , width:"100%" }}
     animate={{opacity:0.99}}
     transition={{duration:0.9 , ease:easeInOut}}
     key={carsIndex}

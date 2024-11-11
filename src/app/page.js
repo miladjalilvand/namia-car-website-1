@@ -6,6 +6,7 @@ import MotDImage from "@/components/MotiMG";
 import {  FaGoogle} from "react-icons/fa";
 import { useTheme } from "./ThemeContext";
 import { useLoading } from "./LoadingContext";
+import ImageSlidersCars from "@/components/newSlideCarsHome";
 
 
 
@@ -34,7 +35,7 @@ export default function Home() {
 
         
 
-
+{/* <div className="h-1/2"><ImageSlidersCars/></div> */}
 <ImageSliderHomePage theme={currentTheme}/>
 <CarsPicker/>
 <ItemSlidesImage  theme={currentTheme}/>

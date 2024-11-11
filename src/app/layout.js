@@ -35,7 +35,7 @@ export default function RootLayout({ children }) {
       >
         <LoadingProvider> 
         <ThemeProvider><NavBar/>
-        <div className=" overflow-hidden xl:px-96">{children} </div>
+        <div className=" overflow-hidden 2xl:px-96">{children} </div>
         <Footer/></ThemeProvider></LoadingProvider>
  
     

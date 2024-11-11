@@ -1,9 +1,8 @@
 "use client";
-
-import { useEffect, useState } from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import MotD from './ItemHome';
-import { motion } from 'framer-motion';
 
 const images = [
   '/assets/1.jpg',
@@ -14,25 +13,38 @@ const images = [
 
 export default function ImageSliderHomePage({ theme }) {
   const [currentImage, setCurrentImage] = useState(0);
+  const swiperRef = useRef(null);
 
+  // Auto slide every 5 seconds
   useEffect(() => {
     const interval = setInterval(() => {
       nextImage();
-    }, 5000); // Auto change image every 5 seconds
+    }, 5000); // Change image every 5 seconds
     return () => clearInterval(interval); // Clean up on unmount
-  }, []);
+  }, [currentImage]); // Add currentImage as dependency
 
+  // Next image handler
   const nextImage = () => {
-    setCurrentImage((prevImage) => (prevImage + 1) % images.length);
+    const nextIndex = (currentImage + 1) % images.length;
+    setCurrentImage(nextIndex);
   };
 
+  // Previous image handler
   const prevImage = () => {
-    setCurrentImage((prevImage) => (prevImage - 1 + images.length) % images.length);
+    const prevIndex = (currentImage - 1 + images.length) % images.length;
+    setCurrentImage(prevIndex);
   };
 
+  // Handle circle click navigation
   const handleCircleClick = (index) => {
     setCurrentImage(index);
   };
+
+  useEffect(() => {
+    if (swiperRef.current && swiperRef.current.swiper) {
+      swiperRef.current.swiper.slideTo(currentImage);
+    }
+  }, [currentImage]); // Update swiper slide when currentImage changes
 
   return (
     <div
@@ -40,20 +52,31 @@ export default function ImageSliderHomePage({ theme }) {
       style={{ backgroundColor: theme.background, color: theme.color }}
     >
       {/* Image Container */}
-      <div className="relative h-2/3 md:w-1/2 md:h-1/2">
-
-          <Image
-                      src={images[currentImage]} 
-                      alt="تصویر" 
-                      width={10000} 
-                      height={240}
-
-            // style={{ objectFit: "cover", height: "100%", width: "100%" }}
-          />
-   
+      <div className="relative h-2/3 w-full md:w-1/2 md:h-1/2">
+        <Swiper
+          onSlideChange={(swiper) => setCurrentImage(swiper.activeIndex)}
+          initialSlide={currentImage}
+          ref={swiperRef}
+          slidesPerView={1}
+          spaceBetween={0}
+        >
+          {images.map((src, index) => (
+            <SwiperSlide key={index}>
+              <Image
+                src={src}
+                alt="تصویر"
+                width={10000}
+                height={240}
+                style={{ objectFit: "cover", height: "100%", width: "100%" }}
+                priority
+            
+              />
+            </SwiperSlide>
+          ))}
+        </Swiper>
 
         {/* Navigation Buttons */}
-        <div className="absolute bottom-0 left-0 -1/2 flex">
+        <div className="absolute bottom-0 left-0 -1/2 flex z-30">
           <button
             onClick={prevImage}
             className="bg-red-700 text-white px-4 py-2 hover:bg-gray-800"
