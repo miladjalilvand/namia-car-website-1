@@ -3,6 +3,8 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import MotD from './ItemHome';
+import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+
 
 const images = [
   '/assets/1.jpg',
@@ -52,7 +54,7 @@ export default function ImageSliderHomePage({ theme }) {
       style={{ backgroundColor: theme.background, color: theme.color }}
     >
       {/* Image Container */}
-      <div className="relative h-2/3 w-full md:w-1/2 md:h-1/2">
+      <div className="relative h-2/3 w-full md:w-1/2 md:h-1/2 cursor-pointer">
         <Swiper
           onSlideChange={(swiper) => setCurrentImage(swiper.activeIndex)}
           initialSlide={currentImage}
@@ -76,18 +78,18 @@ export default function ImageSliderHomePage({ theme }) {
         </Swiper>
 
         {/* Navigation Buttons */}
-        <div className="absolute bottom-0 left-0 -1/2 flex z-30">
+        <div className="absolute bottom-0 left-0 -1/2 flex z-20">
           <button
             onClick={prevImage}
-            className="bg-red-700 text-white px-4 py-2 hover:bg-gray-800"
+            className="bg-red-700 text-white px-4 py-4 hover:bg-gray-800"
           >
-            &lt;
+         <IoIosArrowForward/>
           </button>
           <button
             onClick={nextImage}
-            className="bg-red-700 text-white px-4 py-2 hover:bg-gray-800"
+            className="bg-red-700 text-white px-4 py-4 hover:bg-gray-800"
           >
-            &gt;
+            <IoIosArrowBack/>
           </button>
         </div>
       </div>
