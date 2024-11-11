@@ -44,7 +44,7 @@ const ItemSlidesImage = ({ theme }) => {
           <div
             key={key}
             ref={(el) => (itemRefs.current[key] = el)}
-            className="flex flex-col md:flex-row items-center justify-around h-screen"
+            className={`flex ${key % 2 === 0 && "flex-col-reverse"} flex-col   md:flex-row items-center justify-around h-screen`}
             style={{
               direction: key % 2 === 0 ? "ltr" : "rtl",
               backgroundColor: key % 2 === 0 ? "rgb(185, 28, 28)" : theme.background,
