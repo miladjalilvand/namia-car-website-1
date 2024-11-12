@@ -1,7 +1,4 @@
-// app/item/[id]/page.js
-import { use } from 'react';
 
-// This function generates paths for dynamic routes at build time
 export async function generateStaticParams() {
   const res = await fetch('https://jsonplaceholder.typicode.com/posts');
   const posts = await res.json();
@@ -12,21 +9,22 @@ export async function generateStaticParams() {
   }));
 }
 
-// Fetching the data inside the component
-export default function Item({ params }) {
-  const { id } = params;
+export default async function Item({ params }) {
+  // Await `params` to ensure it’s fully loaded before using its properties
+  const { id } = await params;
 
-  // Fetching data based on the dynamic 'id'
-  const item = use(fetch(`https://jsonplaceholder.typicode.com/posts?id=${id}`).then(res => res.json()));
+  // Fetch data based on the dynamic 'id'
+  const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`);
+  const item = await res.json();
 
   // Render the item data
   return (
     <div className="pt-12">
-      {item.length > 0 ? (
+      {item ? (
         <div className="flex flex-col">
-          <h1>{item[0].id}</h1>
-          <p>{item[0].title}</p>
-          <p>{item[0].body}</p>
+          <h1>{item.id}</h1>
+          <p>{item.title}</p>
+          <p>{item.body}</p>
         </div>
       ) : (
         <p>Post not found</p>
