@@ -5,6 +5,8 @@ import Footer from "@/components/Footer";
 import NavBar from "@/components/Navbar";
 import { ThemeProvider } from "./ThemeContext";
 import { LoadingProvider } from "./LoadingContext";
+import { NextUIProvider } from "@nextui-org/react";
+
 
 
 
@@ -33,10 +35,12 @@ export default function RootLayout({ children }) {
       <body dir="rtl"
         className={`${vaz.className}  antialiased " h-screen    `}
       >
+        <NextUIProvider>
         <LoadingProvider> 
         <ThemeProvider><NavBar/>
         <div className=" overflow-hidden 2xl:px-96">{children} </div>
         <Footer/></ThemeProvider></LoadingProvider>
+        </NextUIProvider>
  
     
       </body>

@@ -42,7 +42,9 @@ export default function Products() {
       </div>
 
       {/* Pagination */}
+      
       <Pagination
+      showControls showShadow loop color="danger"
         aria-label="Pagination"
         total={Math.ceil(500 / perItemsInPage)}
         page={page}
