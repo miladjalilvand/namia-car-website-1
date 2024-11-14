@@ -148,14 +148,14 @@ const pushin = (path) => {
    animate={{opacity:1}}
    transition={{duration:1.5}}
    key={key} 
-   className="cursor-pointer" onClick={() => pushin(val.url)}>{val.name}</motion.div>
+   className="" onClick={() => pushin(val.url)}>{val.name}</motion.div>
                ))}
               </div>
             </div>
            <div className="flex flex-row">
-           <div className="p-4 text-white cursor-pointer">طرح تعویض</div>
-            <div className="p-4 text-white cursor-pointer">تست درایو</div>
-            <div className="p-4 text-white cursor-pointer">وبلاگ</div>
+           <div className="m-4 text-white cursor-pointer">طرح تعویض</div>
+            <div className="m-4 text-white cursor-pointer">تست درایو</div>
+            <div className="m-4 text-white cursor-pointer">وبلاگ</div>
            </div>
           </motion.div>
         {  (isOpen && <div onClick={() => handleClick()} className="fixed md:w-screen z-30 md:h-screen bg-black opacity-70"></div>)}

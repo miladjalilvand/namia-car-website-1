@@ -2,6 +2,7 @@
 
 import { Pagination } from "@nextui-org/react";
 import Image from "next/image";
+import Link from "next/link";
 import { useState, useEffect } from "react";
 
 export default function Products() {
@@ -22,11 +23,12 @@ export default function Products() {
   }, [page]);
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col bg-fuchsia-100">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 pt-12">
         {data &&
           data.map((val) => (
-            <div key={val.id} className="p-4 border rounded-lg shadow-sm">
+            <Link key={val.id} href={`/ps/${val.id}`} >
+            <div key={val.id} className="p-4 border rounded-lg shadow-sm bg-white">
               <Image
                 loading="lazy"
                 src={val.thumbnailUrl}
@@ -37,7 +39,10 @@ export default function Products() {
                 onError={(e) => (e.target.src = '/fallback-image.jpg')} // Fallback in case of broken image
               />
               <p className="mt-2 text-sm text-gray-700">{val.title}</p>
-            </div>
+            
+              
+           
+            </div>   </Link>
           ))}
       </div>
 
