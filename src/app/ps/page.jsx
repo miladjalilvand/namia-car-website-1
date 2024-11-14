@@ -42,9 +42,21 @@ export default function Products() {
       </div>
 
       {/* Pagination */}
-      
+      {/* <Pagination
+  total={10}
+  renderItem={({ value, isActive, onNext, onPrevious }) => (
+    <button
+      className={isActive ? "active" : ""}
+      onClick={() => setPage(value)}
+    >
+      {value}
+    </button>
+  )}
+/> */}
       <Pagination
-      showControls showShadow loop color="danger"
+  
+      
+      // showShadow loop color="danger" dotsJump={10} boundaries={10}
         aria-label="Pagination"
         total={Math.ceil(500 / perItemsInPage)}
         page={page}
