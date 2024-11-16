@@ -1,7 +1,6 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
-import Link from "next/link";
 
 const itemsIndex = [
   "item 1",
@@ -17,34 +16,58 @@ const itemsIndex = [
 
 export default function Item({ params }) {
   const [item, setItem] = useState(null);
+  const refs = useRef([]);
   const [isScrolled, setScrolled] = useState(false);
-  const [lastScrollY, setLastScrollY] = useState(0); // ذخیره موقعیت اسکرول قبلی
+  const [lastScrollY, setLastScrollY] = useState(0);
 
-  // استفاده از useEffect برای رصد تغییرات اسکرول
+  const [visibleItems, setVisibleItems] = useState(Array(itemsIndex.length).fill(false));
+
+  console.log(visibleItems);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const index = refs.current.indexOf(entry.target);
+
+          if (index !== -1) {
+            setVisibleItems((prev) => {
+              const newVisibility = [...prev];
+              newVisibility[index] = entry.isIntersecting;
+              return newVisibility;
+            });
+          }
+        });
+      },
+      { threshold:1 }
+    );
+
+    refs.current.forEach((ref) => ref && observer.observe(ref));
+    return () => observer.disconnect();
+  }, []);
+
   useEffect(() => {
     const handleScroll = () => {
-
       if (window.scrollY < lastScrollY) {
         setScrolled(false);
       } else {
         setScrolled(true);
       }
-      // به روز رسانی موقعیت اسکرول
       setLastScrollY(window.scrollY);
     };
 
     window.addEventListener("scroll", handleScroll);
-
-    // حذف event listener زمانی که کامپوننت از صفحه حذف می‌شود
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [lastScrollY]); // وابستگی به تغییرات lastScrollY
+  }, [lastScrollY]);
 
   useEffect(() => {
     const fetchItem = async () => {
       const { id } = await params;
-      const res = await fetch(`https://jsonplaceholder.typicode.com/photos/${id}`);
+      const res = await fetch(
+        `https://jsonplaceholder.typicode.com/photos/${id}`
+      );
       const data = await res.json();
       setItem(data);
     };
@@ -52,44 +75,48 @@ export default function Item({ params }) {
     fetchItem();
   }, [params]);
 
-  // تابع اسکرول نرم و قرار دادن المنت در وسط صفحه
-  const scrollToSection = (sectionId) => {
-    const section = document.getElementById(sectionId);
+  const scrollToSection = (index) => {
+    const section = refs.current[index];
     if (section) {
       section.scrollIntoView({
-        behavior: "smooth", // اسکرول نرم
-        block: "center",    // قرار دادن المنت در وسط صفحه
+        behavior: "smooth",
+        block: "center",
       });
     }
   };
 
   return (
     <div className="flex flex-col">
-      {/* کانتینر برای ایجاد اسکرول افقی */}
       <div className="fixed overflow-x-auto w-full bg-black text-white z-10">
         <div className="flex flex-row min-w-max justify-around items-center px-4 h-10">
-          {itemsIndex.map((val, ind) => (
-            <div
-              key={ind}
-              className="cursor-pointer"
-              onClick={() => scrollToSection(`section-${ind}`)} // اسکرول به سکشن خاص
-            >
-              {val}
-            </div>
-          ))}
+          {itemsIndex.map((val, ind) => {
+            const isVis = visibleItems[ind];
+            console.log("isVis:" + isVis);
+            return (
+              <div
+                key={ind}
+                className={`cursor-pointer ${isVis ? "bg-gray-900" : ""}`}
+                onClick={() => scrollToSection(ind)}
+              >
+                {val}
+              </div>
+            );
+          })}
         </div>
       </div>
 
-      {/* سکشن‌ها */}
-      {itemsIndex.map((val, ind) => (
-        <div
-          id={`section-${ind}`} // شناسه هر سکشن
-          key={ind}
-          className="flex flex-col mt-12 cursor-pointer h-60 bg-gray-400 m-4 items-center justify-center"
-        >
-          {val}
-        </div>
-      ))}
+      {itemsIndex.map((val, ind) => {
+        return (
+          <div
+            ref={(el) => (refs.current[ind] = el)}
+            id={`section-${ind}`}
+            key={ind}
+            className="flex flex-col mt-12 cursor-pointer h-96 bg-gray-400 m-1 items-center justify-center"
+          >
+            {val}
+          </div>
+        );
+      })}
 
       {item ? (
         <div className="flex flex-col mt-16">
@@ -108,10 +135,8 @@ export default function Item({ params }) {
         <p>Loading...</p>
       )}
 
-      {/* نمایش وضعیت اسکرول */}
       <div>isScrolled : {isScrolled ? "True" : "False"}</div>
 
-      {/* فوتر در صورت اسکرول به سمت بالا */}
       {isScrolled && (
         <div className="fixed bottom-0 left-0 w-full h-6 bg-fuchsia-900 flex">
           <div className="w-1/2 bg-red-400 text-center flex items-center justify-center">

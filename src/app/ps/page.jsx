@@ -28,7 +28,7 @@ export default function Products() {
         {data &&
           data.map((val) => (
             <Link key={val.id} href={`/ps/${val.id}`} >
-            <div key={val.id} className="p-4 border rounded-lg shadow-sm bg-white">
+            <div key={val.id} className="p-4 border rounded-lg shadow-sm bg-white hover:bg-gray-400 hover:opacity-85">
               <Image
                 loading="lazy"
                 src={val.thumbnailUrl}
