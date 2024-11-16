@@ -4,17 +4,16 @@ import { Pagination } from "@nextui-org/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation"; 
+import { useRouter, useSearchParams } from "next/navigation";
 
 export default function Products() {
-  const router = useRouter(); 
-  const [page, setPage] = useState(localStorage.getItem("currentPage")); // مقدار پیش‌فرض صفحه برابر با 1
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const [page, setPage] = useState(parseInt(searchParams.get('page') ?? '1', 10)); // Ensure page is an integer
   const [data, setData] = useState(null);
   const perItemsInPage = 9;
 
-
-
-  // بارگذاری داده‌ها
+  // UseEffect to load data when the page number changes
   useEffect(() => {
     const fetching = async () => {
       const res = await fetch(
@@ -27,9 +26,8 @@ export default function Products() {
     fetching();
   }, [page]);
 
-  // تغییر URL هنگام تغییر صفحه
+  // Handle page change in pagination
   const handlePageChange = (newPage) => {
-    localStorage.setItem("currentPage", newPage); 
     setPage(newPage);
     router.push(`/ps?page=${newPage}`, undefined, { shallow: true });
   };
@@ -60,10 +58,11 @@ export default function Products() {
 
       {/* Pagination */}
       <Pagination
+        initialPage={page}  // Use page as the initialPage
         aria-label="Pagination"
         total={Math.ceil(500 / perItemsInPage)}
         page={page}
-        onChange={handlePageChange} 
+        onChange={handlePageChange} // Handle page change
         className="mt-6"
       />
     </div>
