@@ -12,14 +12,7 @@ export default function Products() {
   const [data, setData] = useState(null);
   const perItemsInPage = 9;
 
-  // استفاده از useEffect برای بارگذاری صفحه از localStorage
-  // useEffect(() => {
-  //   const pageLocal = localStorage.getItem("currentPage");
-  //   if (pageLocal) {
-  //     setPage(Number(pageLocal));
-  //      // تبدیل مقدار به عدد
-  //   }
-  // }, []);
+
 
   // بارگذاری داده‌ها
   useEffect(() => {
