@@ -148,7 +148,7 @@ const pushin = (path) => {
    animate={{opacity:1}}
    transition={{duration:1.5}}
    key={key} 
-   className="" onClick={() => pushin(val.url)}>{val.name}</motion.div>
+   className="cursor-pointer" onClick={() => pushin(val.url)}>{val.name}</motion.div>
                ))}
               </div>
             </div>
